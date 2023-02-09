@@ -21,3 +21,6 @@ for file in $file_list; do
 done
 echo "$performed_tests files verified, $failed_tests FAILED lint checks"
 echo "number_of_checklists=$number_of_checklists" >> $GITHUB_OUTPUT
+if [ "$failed_tests" -gt 0 ]; then
+    exit 1
+fi
