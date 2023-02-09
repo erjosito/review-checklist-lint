@@ -4,18 +4,18 @@ This action verifies the correctness of an Azure review checklist (stored in [th
 
 ## Inputs
 
-## `who-to-greet`
+## `language`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Optional** Language whose lists will be linted. Default `"en"`.
 
 ## Outputs
 
-## `time`
+## `number_of_checklists`
 
-The time we greeted you.
+Number of checklists that have been linted
 
 ## Example usage
 
-uses: actions/hello-world-docker-action@v2
+uses: erjosito/review-checklists-lint@v1
 with:
-  who-to-greet: 'Mona the Octocat'
+  language: 'en'
