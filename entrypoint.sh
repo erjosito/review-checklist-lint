@@ -20,8 +20,9 @@ for file in $file_list; do
     # Figure out whether we want to process this specific one, if criteria were specified
     process=yes
     if [ -n "$criteria_key" -a -n "$criteria_value" ]; then
-        checklist_criteria_value=$(cat $file | jq -r "$criteria_key")
-        if [ "$checklist_criteria_value" != "$criteria_value" ]; then
+        file_criteria_value=$(cat $file | jq -r "$criteria_key")
+        if [ "$file_criteria_value" != "$criteria_value" ]; then
+            echo "File $file: retrieved criteria value $file_criteria_value does not match criteria $criteria_value (JSON key $criteria_key)"
             process=no
         fi
     fi
