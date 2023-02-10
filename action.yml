@@ -20,7 +20,7 @@ inputs:
     default: ''
 outputs:
   number_of_checklists: # id of output
-    description: 'The number of checklists linted'
+    description: 'The number of checklists that have been processed'
 runs:
   using: 'docker'
   image: 'Dockerfile'
