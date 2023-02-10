@@ -5,7 +5,7 @@ file_extension="$1"
 key_name="$2"
 criteria_key="$3"
 criteria_value="$4"
-file_list=$(ls -R1 "*/*.$file_extension")
+file_list=$(eval "ls -R1 */*.$file_extension")
 number_of_checklists=$(echo $file_list | wc -l)
 
 # Info message
