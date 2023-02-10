@@ -43,12 +43,14 @@ for file in $file_list; do
         fi
     fi
     # Check categories
-    categories=$(cat $file | jq -r "try .. | objects | select( .$key_name) | .$key_name" | sort -u)
+    category_items=$(cat $file | jq -r 'try .. | objects | select( .category) | .category' | sort -u)
     category_list=$(cat $file | jq -r ".categories[].name" | sort -u)
-    if [ "$categories" == "$category_list" ]; then
+    if [ "$category_items" == "$category_list" ]; then
         echo "INFO: categories in checklist $file match with the categories defined in the checks"
     else
         echo "INFO: there is a discrepancy in the categories defined in file $file."
+        echo "DEBUG: categories in check items: $category_items"
+        echo "DEBUG: categories in category list: $category_list"
     fi
 done
 echo "DEBUG: $performed_tests files verified, $unique_failed_tests FAILED lint checks ($unique_failed_tests_not_counted files failed the check, but did not match the criteria)"
