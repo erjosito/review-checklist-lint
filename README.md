@@ -4,9 +4,21 @@ This action verifies the correctness of an Azure review checklist (stored in [th
 
 ## Inputs
 
-## `language`
+## `file_extension`
 
-**Optional** Language whose lists will be linted. Default `"en"`.
+**Optional** File extension for the lists to be linted. Default `"en.json"`.
+
+## `key_name`
+
+**Optional** Key name in the JSON files to look for the unique values. Default `"guid"`.
+
+## `criteria_key`
+
+**Optional** JSON key to use so that only specific checklists are linted. Default `""`. It requires `criteria_value`.
+
+## `criteria_value`
+
+**Optional** JSON value to use so that only specific checklists are linted. Default `""`. It requires `criteria_key`.
 
 ## Outputs
 
