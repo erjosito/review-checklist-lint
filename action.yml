@@ -25,4 +25,4 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.language }}
+    - ${{ inputs.file_extension }} ${{ inputs.key_name }} ${{ criteria_key }} ${{ criteria_value }}
