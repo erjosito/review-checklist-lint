@@ -52,6 +52,32 @@ for file in $file_list; do
         echo "DEBUG: categories in check items: $category_items"
         echo "DEBUG: categories in category list: $category_list"
     fi
+    # Check any missing severity
+    wrong_items=$(cat $file | jq -r '.items[] | select(has("severity") | not) | .guid')
+    if [[ -z $wrong_items ]]; then
+        echo "DEBUG: all items in file $file have the severity attribute"
+    else
+        echo "INFO: the following items have a missing severity in file $file:"
+        echo $wrong_items
+        if [ "$process" == "yes" ]; then
+            unique_failed_tests=$((failed_tests+1))
+        else
+            unique_failed_tests_not_counted=$((failed_tests_not_counted+1))
+        fi
+    fi
+    # Check any missing category
+    wrong_items=$(cat $file | jq -r '.items[] | select(has("category") | not) | .guid')
+    if [[ -z $wrong_items ]]; then
+        echo "DEBUG: all items in file $file have the category attribute"
+    else
+        echo "INFO: the following items have a missing category in file $file:"
+        echo $wrong_items
+        if [ "$process" == "yes" ]; then
+            unique_failed_tests=$((failed_tests+1))
+        else
+            unique_failed_tests_not_counted=$((failed_tests_not_counted+1))
+        fi
+    fi
 done
 echo "DEBUG: $performed_tests files verified, $unique_failed_tests FAILED lint checks ($unique_failed_tests_not_counted files failed the check, but did not match the criteria)"
 echo "number_of_checklists=$number_of_checklists" >> $GITHUB_OUTPUT
